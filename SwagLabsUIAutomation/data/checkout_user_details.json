@@ -1,0 +1,28 @@
+{
+  "user_details_and_errors": [
+    {
+      "first_name": "",
+      "last_name": "",
+      "postal_code": "",
+      "error_code": "Error: First Name is required"
+    },
+    {
+      "first_name": "",
+      "last_name": "Name",
+      "postal_code": "123789",
+      "error_code": "Error: First Name is required"
+    },
+    {
+      "first_name": "User",
+      "last_name": "",
+      "postal_code": "123789",
+      "error_code": "Error: Last Name is required"
+    },
+    {
+      "first_name": "User",
+      "last_name": "Name",
+      "postal_code": "",
+      "error_code": "Error: Postal Code is required"
+    }
+  ]
+}
