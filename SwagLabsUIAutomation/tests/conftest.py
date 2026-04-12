@@ -4,7 +4,7 @@ import time
 
 import pytest
 from playwright.sync_api import Playwright
-from .pageObjects.login import LoginPage
+from SwagLabsUIAutomation.pageObjects.login import LoginPage
 
 
 def pytest_addoption(parser):
@@ -13,7 +13,7 @@ def pytest_addoption(parser):
 @pytest.fixture(scope='function')
 def product_details_list_from_json():
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    data_file = os.path.join(base_dir, "data", "product_details.json")
+    data_file = os.path.join(base_dir, "../data", "product_details.json")
     with open(data_file) as product_details_obj:
         test_data = json.load(product_details_obj)
         item_details_list = test_data['product_details']
@@ -23,7 +23,7 @@ def product_details_list_from_json():
 @pytest.fixture(scope="function")
 def user_details_and_errors_list_from_json():
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    data_file = os.path.join(base_dir, "data", "checkout_user_details.json")
+    data_file = os.path.join(base_dir, "../data", "checkout_user_details.json")
     with open(data_file) as checkout_user_details_obj:
         test_data = json.load(checkout_user_details_obj)
         checkout_user_list = test_data['user_details_and_errors']

@@ -4,7 +4,7 @@ import time
 import pytest
 from playwright.sync_api import expect
 
-from .pageObjects.login import LoginPage
+from SwagLabsUIAutomation.pageObjects.login import LoginPage
 
 # def test_ete_ui_flow_process(login):
 #     dashboard_obj = login.login_using_valid_credentials("standard_user", "secret_sauce")
@@ -18,7 +18,7 @@ from .pageObjects.login import LoginPage
 # Positive Scenarios - Verify user is redirected to inventory page after successful login
 # Positive Scenarios - Verify session persists on page refresh
 base_dir = os.path.dirname(os.path.abspath(__file__))
-data_file = os.path.join(base_dir, "data", "login_credentials.json")
+data_file = os.path.join(base_dir, "../data", "login_credentials.json")
 with open(data_file) as login_credential_obj:
     test_data = json.load(login_credential_obj)
     valid_user_credentials_list = test_data['valid_user_credentials']
