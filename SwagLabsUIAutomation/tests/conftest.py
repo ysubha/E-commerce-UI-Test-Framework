@@ -47,19 +47,9 @@ def browser_selection(playwright: Playwright, request):
     browser.close()
 
 
-@pytest.fixture(scope='session')
-def login_credentials_from_json():
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    data_file = os.path.join(base_dir, "../data", "login_credentials.json")
-    with open(data_file) as login_credential_obj:
-        test_data = json.load(login_credential_obj)
-        valid_user_credentials_list = test_data['valid_user_credentials']
-        invalid_user_credentials_list = test_data['invalid_user_credentials']
-        return valid_user_credentials_list, invalid_user_credentials_list
-
-
 @pytest.fixture(scope="function")
 def login_fixture(browser_selection):
+    browser_selection.context.clear_cookies()
     login_obj = LoginPage(browser_selection)
     login_obj.navigation()
     login_obj.login_page_verification()

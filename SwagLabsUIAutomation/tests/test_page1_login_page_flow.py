@@ -1,3 +1,6 @@
+import json
+import os
+
 import pytest
 from playwright.sync_api import expect
 
@@ -7,14 +10,18 @@ from playwright.sync_api import expect
 # Positive Scenarios - Verify user is redirected to inventory page after successful login
 # Positive Scenarios - Verify session persists on page refresh
 
+def load_valid_credentials():
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    data_file = os.path.join(base_dir, "../data", "login_credentials.json")
+    with open(data_file) as f:
+        return json.load(f)['valid_user_credentials']
 
-def test_positive_case_for_login_credentials(login_fixture, login_credentials_from_json):
-    valid_user_credentials_list = login_credentials_from_json[0]
-    for user_credential in valid_user_credentials_list:
-        dashboard_obj = login_fixture.login_using_valid_credentials(user_credential['username'],
+@pytest.mark.parametrize("user_credential",load_valid_credentials())
+def test_positive_case_for_login_credentials(login_fixture, user_credential):
+    dashboard_obj = login_fixture.login_using_valid_credentials(user_credential['username'],
                                                                     user_credential['user_password'])
-        dashboard_obj.reload_dashboard()
-        dashboard_obj.dashboard_visibility()
+    dashboard_obj.reload_dashboard()
+    dashboard_obj.dashboard_visibility()
 
 
 def test_positive_case_for_problem_user_login_credentials(login_fixture):
