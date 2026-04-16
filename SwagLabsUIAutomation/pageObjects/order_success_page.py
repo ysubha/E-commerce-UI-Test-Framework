@@ -1,8 +1,6 @@
-
-
 class OrderSuccessPage:
 
-    def __init__(self,page):
+    def __init__(self, page):
         self.page = page
 
     def logout(self):

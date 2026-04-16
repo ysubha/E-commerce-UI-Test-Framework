@@ -1,9 +1,10 @@
 from playwright.sync_api import expect
 from SwagLabsUIAutomation.pageObjects.checkout_overview2 import CheckoutOverview2
 
-class CheckoutOverview1 :
 
-    def __init__(self,page):
+class CheckoutOverview1:
+
+    def __init__(self, page):
         self.page = page
 
     def fill_personal_info_details(self, first_name, last_name, postal_code):

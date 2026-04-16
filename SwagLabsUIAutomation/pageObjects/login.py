@@ -1,9 +1,9 @@
 from playwright.sync_api import expect
-
 from .dashboard import Dashboard
 
+
 class LoginPage:
-    def __init__(self,page):
+    def __init__(self, page):
         self.page = page
 
     def navigation(self):
@@ -18,14 +18,14 @@ class LoginPage:
         self.page.goto("https://www.saucedemo.com/inventory.html")
         expect(self.page).to_have_url("https://www.saucedemo.com/")
         expect(self.page.locator("#login-button")).to_be_visible()
-        expect(self.page.locator("h3[data-test='error']")).to_have_text("Epic sadface: You can only access '/inventory.html' when you are logged in.")
+        expect(self.page.locator("h3[data-test='error']")).to_have_text(
+            "Epic sadface: You can only access '/inventory.html' when you are logged in.")
 
     def verify_app_pages_not_accessible_without_login(self, url, error_code):
         self.page.goto(url)
         expect(self.page).to_have_url("https://www.saucedemo.com/")
         expect(self.page.locator("#login-button")).to_be_visible()
         expect(self.page.locator("h3[data-test='error']")).to_have_text(error_code)
-
 
     def verify_back_navigation_blocked(self):
         self.page.go_back()
@@ -43,9 +43,9 @@ class LoginPage:
         dashboard_obj = Dashboard(self.page)
         return dashboard_obj
 
-# Negative Scenarios
+    # Negative Scenarios
 
-    def login_and_expect_error (self, username, password, expected_error):
+    def login_and_expect_error(self, username, password, expected_error):
         username_locator = self.page.get_by_placeholder("Username")
         password_locator = self.page.get_by_placeholder("Password")
 
@@ -56,6 +56,7 @@ class LoginPage:
 
         self.page.locator("#login-button").click()
         error_locator = self.page.locator("h3[data-test='error']")
-        expect(error_locator).to_be_visible() # Negative Scenarios - Verify error message text and UI styling
-        expect(error_locator).to_have_text(expected_error) # Negative Scenarios - Verify error message text and UI styling
+        expect(error_locator).to_be_visible()  # Negative Scenarios - Verify error message text and UI styling
+        expect(error_locator).to_have_text(
+            expected_error)  # Negative Scenarios - Verify error message text and UI styling
         return error_locator
