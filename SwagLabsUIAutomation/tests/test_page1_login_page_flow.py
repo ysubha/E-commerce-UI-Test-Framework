@@ -61,3 +61,7 @@ def test_negative_case_for_login_with_missing_password_credentials(login_fixture
     error_locator = login_fixture.login_and_expect_error(username, password, error_message)
     login_fixture.login_using_valid_credentials("standard_user", "secret_sauce")
     expect(error_locator).not_to_be_visible()  # Negative Scenarios - Verify error disappears after correcting input
+
+def test_locked_out_user_cannot_login(login_fixture):
+    error_message = "Epic sadface: Sorry, this user has been locked out."
+    login_fixture.login_and_expect_error("locked_out_user", "secret_sauce", error_message)
