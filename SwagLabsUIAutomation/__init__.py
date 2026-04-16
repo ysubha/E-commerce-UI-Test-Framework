@@ -77,3 +77,29 @@
             Verify UI is usable during slow loading
             Verify no console errors on page load
 """
+
+"""
+https://github.com/ysubha/E-commerce-UI-Test-Framework/tree/main/SwagLabsUIAutomation
+
+https://github.com/ysubha/E-commerce-UI-Test-Framework/tree/main/SwagLabsUIAutomation/tests/conftest.py
+https://github.com/ysubha/E-commerce-UI-Test-Framework/tree/main/SwagLabsUIAutomation/tests/test_page1_login_page_flow.py
+https://github.com/ysubha/E-commerce-UI-Test-Framework/tree/main/SwagLabsUIAutomation/tests/test_page2_dashboard_page_flow.py
+https://github.com/ysubha/E-commerce-UI-Test-Framework/tree/main/SwagLabsUIAutomation/tests/test_page3_cart_page_flow.py
+https://github.com/ysubha/E-commerce-UI-Test-Framework/tree/main/SwagLabsUIAutomation/tests/test_page4_checkout_overview1_page_flow.py
+https://github.com/ysubha/E-commerce-UI-Test-Framework/tree/main/SwagLabsUIAutomation/tests/test_page5_checkout_overview2_page_flow.py
+https://github.com/ysubha/E-commerce-UI-Test-Framework/tree/main/SwagLabsUIAutomation/tests/test_page6_order_success_page_flow.py
+https://github.com/ysubha/E-commerce-UI-Test-Framework/tree/main/SwagLabsUIAutomation/tests/test_page7_post_logout_verifications.py
+
+
+https://github.com/ysubha/E-commerce-UI-Test-Framework/blob/main/SwagLabsUIAutomation/pageObjects/cart.py
+https://github.com/ysubha/E-commerce-UI-Test-Framework/blob/main/SwagLabsUIAutomation/pageObjects/checkout_overview1.py
+https://github.com/ysubha/E-commerce-UI-Test-Framework/blob/main/SwagLabsUIAutomation/pageObjects/checkout_overview2.py
+https://github.com/ysubha/E-commerce-UI-Test-Framework/blob/main/SwagLabsUIAutomation/pageObjects/dashboard.py
+https://github.com/ysubha/E-commerce-UI-Test-Framework/blob/main/SwagLabsUIAutomation/pageObjects/login.py
+https://github.com/ysubha/E-commerce-UI-Test-Framework/blob/main/SwagLabsUIAutomation/pageObjects/order_success_page.py
+https://github.com/ysubha/E-commerce-UI-Test-Framework/blob/main/SwagLabsUIAutomation/pageObjects/post_logout.py
+
+https://github.com/ysubha/E-commerce-UI-Test-Framework/tree/main/SwagLabsUIAutomation/data/checkout_user_details.json
+https://github.com/ysubha/E-commerce-UI-Test-Framework/tree/main/SwagLabsUIAutomation/data/login_credentials.json
+https://github.com/ysubha/E-commerce-UI-Test-Framework/tree/main/SwagLabsUIAutomation/data/product_details.json
+"""
