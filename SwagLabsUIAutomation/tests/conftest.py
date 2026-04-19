@@ -5,6 +5,7 @@ import allure
 import pytest
 from playwright.sync_api import Playwright
 from SwagLabsUIAutomation.pageObjects.login import LoginPage
+from faker import Faker
 
 
 def pytest_addoption(parser):
@@ -27,6 +28,17 @@ def allure_screenshot_on_failure(browser_selection, request):
             name=request.node.name,
             attachment_type=allure.attachment_type.PNG
         )
+
+
+@pytest.fixture(scope='function')
+def fake_checkout_user():
+    fake = Faker()
+    user_details = {
+        'first_name': fake.first_name(),
+        'last_name': fake.last_name(),
+        'post_code': fake.postcode()
+    }
+    return user_details
 
 
 @pytest.fixture(scope='function')
@@ -100,8 +112,10 @@ def checkout_overview1_fixture(cart_fixture):
 
 
 @pytest.fixture(scope="function")
-def checkout_overview2_fixture(checkout_overview1_fixture):
-    checkout_overview1_fixture.fill_personal_info_details("User", "Name", "123456")
+def checkout_overview2_fixture(checkout_overview1_fixture, fake_checkout_user):
+    checkout_overview1_fixture.fill_personal_info_details(fake_checkout_user['first_name'],
+                                                          fake_checkout_user['last_name'],
+                                                          fake_checkout_user['post_code'])
     checkout_overview2_obj = checkout_overview1_fixture.go_to_checkout_overview_page2()
     yield checkout_overview2_obj
 

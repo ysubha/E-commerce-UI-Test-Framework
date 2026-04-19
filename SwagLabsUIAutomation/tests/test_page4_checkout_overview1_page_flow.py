@@ -9,6 +9,7 @@ import pytest
 # Checkout Step One
 #   Proceed to checkout with items in cart
 #   Checkout with valid user information
+@pytest.mark.integration 
 @allure.feature('Checkout')
 @allure.story('Valid checkout flow')
 def test_positive_case_of_checkout_with_cart_items(checkout_overview1_fixture):
@@ -29,6 +30,7 @@ def load_user_details_and_errors_list_from_json():
         return json.load(data_file_obj)['user_details_and_errors']
 
 
+@pytest.mark.integration 
 @allure.feature('Checkout')
 @allure.story('Checkout error validations')
 @pytest.mark.parametrize("user", load_user_details_and_errors_list_from_json())

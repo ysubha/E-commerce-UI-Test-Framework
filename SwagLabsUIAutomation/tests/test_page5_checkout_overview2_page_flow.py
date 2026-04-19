@@ -1,4 +1,5 @@
 import allure
+import pytest
 
 
 # LESSON: 💳 4. Checkout Flow (End-to-End)
@@ -7,6 +8,7 @@ import allure
 #   Verify item total calculation
 #   Verify tax calculation
 #   Verify total price calculation
+@pytest.mark.integration 
 @allure.feature('Checkout')
 @allure.story('Complete overview validation')
 def test_positive_checkout_overview_flow(checkout_overview2_fixture, product_details_list_from_json):
@@ -19,6 +21,7 @@ def test_positive_checkout_overview_flow(checkout_overview2_fixture, product_det
 #   Complete checkout successfully
 #   Verify success message after order completion
 #   Verify user is redirected to confirmation page
+@pytest.mark.integration 
 @allure.feature('Checkout')
 @allure.story('Complete order')
 def test_positive_complete_order_flow(checkout_overview2_fixture, product_details_list_from_json):

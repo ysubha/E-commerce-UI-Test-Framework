@@ -17,7 +17,7 @@ url_error_code_list = [("https://www.saucedemo.com/inventory.html",
                         "emo.com/checkout-complete.html",
                         "Epic sadface: You can only access '/checkout-complete.html' when you are logged in.")]
 
-
+@pytest.mark.integration
 @allure.feature('Security')
 @allure.story('Unauthorized access to protected pages')
 @pytest.mark.parametrize(("web_pg_url", "error_code"), url_error_code_list)

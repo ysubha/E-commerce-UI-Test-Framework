@@ -2,23 +2,12 @@ import allure
 import pytest
 
 
-# @pytest.fixture(autouse=True)
-# def reset_app_state(request,dashboard_fixture):
-#     print("heoooo")
-#     if request.node.get_closest_marker("no_reset"):
-#         yield
-#         return
-#     yield
-#     if not dashboard_fixture.page.is_closed():
-#         dashboard_fixture.page.locator("#react-burger-menu-btn").click()
-#         dashboard_fixture.page.locator("a#reset_sidebar_link").click()
-#         dashboard_fixture.page.locator("button#react-burger-cross-btn").click()
-
 # LESSON: 🛒 2. Inventory / Products Page
 # UI & Data Validation :
 #   Verify product list is displayed
 #   Verify each product has: Name, Price, Description, Image, Add to Cart button
 #   Verify product count matches expected inventory
+@pytest.mark.integration
 @allure.feature("Product Catalogue")
 @allure.story("Products list displayed")
 def test_products_list_displayed(dashboard_fixture, product_details_list_from_json):
@@ -40,6 +29,7 @@ sort_strategy = {
 }
 
 
+@pytest.mark.integration
 @allure.feature("Product Catalogue")
 @allure.story("Product sorting")
 @pytest.mark.parametrize("sorting_filter",
@@ -55,6 +45,7 @@ def test_asc_sorting_of_product(dashboard_fixture, product_details_list_from_jso
 # Remove product from inventory page
 # Remove product from cart page
 # Verify cart badge count updates correctly
+@pytest.mark.integration
 @allure.feature("Cart")
 @allure.story("Add single item")
 def test_adding_single_product_to_cart(dashboard_fixture):
@@ -64,6 +55,7 @@ def test_adding_single_product_to_cart(dashboard_fixture):
     dashboard_fixture.verify_cart_badge_count(len(item_name_list))
 
 
+@pytest.mark.integration
 @allure.feature("Cart")
 @allure.story("Add multiple items")
 def test_adding_multiple_products_to_cart(dashboard_fixture):
@@ -73,6 +65,7 @@ def test_adding_multiple_products_to_cart(dashboard_fixture):
     dashboard_fixture.verify_cart_badge_count(len(item_name_list))
 
 
+@pytest.mark.integration
 @allure.feature("Cart")
 @allure.story("Remove from inventory")
 def test_remove_product_from_inventory(dashboard_fixture):
@@ -84,6 +77,7 @@ def test_remove_product_from_inventory(dashboard_fixture):
     dashboard_fixture.verify_cart_badge_count(0)
 
 
+@pytest.mark.integration
 @allure.feature("Cart")
 @allure.story("Remove from cart page")
 def test_removal_of_products_from_cart_page(dashboard_fixture):

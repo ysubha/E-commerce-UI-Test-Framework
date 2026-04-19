@@ -1,10 +1,12 @@
 import allure
+import pytest
 
 
 # LESSON: 🧺 3. Cart Functionality
 # Persistence
 #   Verify cart items persist after page refresh
 #   Verify cart items persist after navigating back and forth
+@pytest.mark.integration 
 @allure.feature("Cart")
 @allure.story('Cart persistence on refresh')
 def test_dashboard_page_refresh(dashboard_fixture):
@@ -16,6 +18,7 @@ def test_dashboard_page_refresh(dashboard_fixture):
     cart_pg.verify_cart_items(item_name_list)
 
 
+@pytest.mark.integration 
 @allure.feature("Cart")
 @allure.story('Cart persistence on navigation')
 def test_dashboard_to_cart_navigation_back_and_forth(dashboard_fixture):

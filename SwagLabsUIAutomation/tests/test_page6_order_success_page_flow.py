@@ -6,6 +6,7 @@ import pytest
 # Logout from application
 # Verify user is redirected to login page after logout
 # Verify restricted pages are not accessible after logout
+@pytest.mark.integration 
 @allure.feature('Navigation')
 @allure.story('Logout after order')
 @pytest.mark.no_dashboard_teardown
@@ -21,6 +22,7 @@ def test_logout_post_order_completion(order_success_page_fixture):
 # Reset app state from menu
 # Verify cart is cleared after reset
 @pytest.mark.no_dashboard_teardown
+@pytest.mark.integration 
 @allure.feature('Navigation')
 @allure.story('Reset app state')
 def test_reset_app_state(dashboard_fixture, product_details_list_from_json):
