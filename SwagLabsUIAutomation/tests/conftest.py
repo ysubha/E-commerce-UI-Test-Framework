@@ -1,5 +1,7 @@
 import json
 import os
+
+import allure
 import pytest
 from playwright.sync_api import Playwright
 from SwagLabsUIAutomation.pageObjects.login import LoginPage
@@ -7,6 +9,24 @@ from SwagLabsUIAutomation.pageObjects.login import LoginPage
 
 def pytest_addoption(parser):
     parser.addoption("--browser_name", action="store", default="chrome", help="Select the browser to open")
+
+
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    rep = outcome.get_result()
+    setattr(item, "rep_" + rep.when, rep)
+
+
+@pytest.fixture(autouse=True)
+def allure_screenshot_on_failure(browser_selection, request):
+    yield
+    if getattr(request.node, "rep_call", None) and request.node.rep_call.failed:
+        allure.attach(
+            browser_selection.screenshot(),
+            name=request.node.name,
+            attachment_type=allure.attachment_type.PNG
+        )
 
 
 @pytest.fixture(scope='function')
@@ -34,9 +54,9 @@ def user_details_and_errors_list_from_json():
 def browser_selection(playwright: Playwright, request):
     browser_name = request.config.getoption("--browser_name")
     if browser_name == "firefox":
-        browser = playwright.firefox.launch(headless=False)
+        browser = playwright.firefox.launch(headless=True)
     else:
-        browser = playwright.chromium.launch(headless=False)
+        browser = playwright.chromium.launch(headless=True)
 
     context = browser.new_context()
     page = context.new_page()

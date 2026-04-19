@@ -1,8 +1,6 @@
-import json
-import os.path
-import time
-
+import allure
 import pytest
+
 
 # @pytest.fixture(autouse=True)
 # def reset_app_state(request,dashboard_fixture):
@@ -21,10 +19,13 @@ import pytest
 #   Verify product list is displayed
 #   Verify each product has: Name, Price, Description, Image, Add to Cart button
 #   Verify product count matches expected inventory
+@allure.feature("Product Catalogue")
+@allure.story("Products list displayed")
 def test_products_list_displayed(dashboard_fixture, product_details_list_from_json):
     dashboard_fixture.dashboard_visibility()
     dashboard_fixture.validate_product_item_info(product_details_list_from_json[0])
     dashboard_fixture.check_product_count(len(product_details_list_from_json[0]))
+
 
 # LESSON: 🛒 2. Inventory / Products Page
 # Sorting
@@ -37,10 +38,16 @@ sort_strategy = {
     'Price (low to high)': lambda products_lit: sorted(products_lit, key=lambda product: product["price"]),
     'Price (high to low)': lambda products_lit: sorted(products_lit, key=lambda product: product["price"], reverse=True)
 }
-@pytest.mark.parametrize("sorting_filter",['Name (A to Z)','Name (Z to A)','Price (low to high)','Price (high to low)'])
+
+
+@allure.feature("Product Catalogue")
+@allure.story("Product sorting")
+@pytest.mark.parametrize("sorting_filter",
+                         ['Name (A to Z)', 'Name (Z to A)', 'Price (low to high)', 'Price (high to low)'])
 def test_asc_sorting_of_product(dashboard_fixture, product_details_list_from_json, sorting_filter):
     expected_sorted_list = sort_strategy[sorting_filter](product_details_list_from_json[0])
-    dashboard_fixture.verify_sorting_of_products_based_on_given_filter(expected_sorted_list,sorting_filter)
+    dashboard_fixture.verify_sorting_of_products_based_on_given_filter(expected_sorted_list, sorting_filter)
+
 
 # LESSON: 🧺 3. Cart Functionality
 # Add single product to cart
@@ -48,19 +55,26 @@ def test_asc_sorting_of_product(dashboard_fixture, product_details_list_from_jso
 # Remove product from inventory page
 # Remove product from cart page
 # Verify cart badge count updates correctly
-
+@allure.feature("Cart")
+@allure.story("Add single item")
 def test_adding_single_product_to_cart(dashboard_fixture):
     item_name_list = ["Sauce Labs Onesie"]
     dashboard_fixture.add_item_to_cart(item_name_list)
     dashboard_fixture.verify_items_are_added_to_inventory(item_name_list)
     dashboard_fixture.verify_cart_badge_count(len(item_name_list))
 
+
+@allure.feature("Cart")
+@allure.story("Add multiple items")
 def test_adding_multiple_products_to_cart(dashboard_fixture):
     item_name_list = ["Sauce Labs Bike Light", "Sauce Labs Backpack"]
     dashboard_fixture.add_item_to_cart(item_name_list)
     dashboard_fixture.verify_items_are_added_to_inventory(item_name_list)
     dashboard_fixture.verify_cart_badge_count(len(item_name_list))
 
+
+@allure.feature("Cart")
+@allure.story("Remove from inventory")
 def test_remove_product_from_inventory(dashboard_fixture):
     item_name_list = ["Sauce Labs Onesie", "Sauce Labs Bike Light", "Sauce Labs Backpack"]
     dashboard_fixture.add_item_to_cart(item_name_list)
@@ -69,6 +83,9 @@ def test_remove_product_from_inventory(dashboard_fixture):
     dashboard_fixture.verify_items_are_removed_from_cart(item_name_list)
     dashboard_fixture.verify_cart_badge_count(0)
 
+
+@allure.feature("Cart")
+@allure.story("Remove from cart page")
 def test_removal_of_products_from_cart_page(dashboard_fixture):
     item_name_list = ["Sauce Labs Onesie", "Sauce Labs Bike Light"]
     dashboard_fixture.add_item_to_cart(item_name_list)
@@ -76,4 +93,3 @@ def test_removal_of_products_from_cart_page(dashboard_fixture):
     cart_obj = dashboard_fixture.go_to_cart()
     cart_obj.remove_cart_items(item_name_list)
     cart_obj.verify_cart_is_empty()
-

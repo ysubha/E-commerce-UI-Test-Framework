@@ -1,7 +1,5 @@
-import time
-
+import allure
 import pytest
-
 
 # LESSON: 🔒 6. Security & Access Control
 # Access inventory page without login
@@ -19,7 +17,10 @@ url_error_code_list = [("https://www.saucedemo.com/inventory.html",
                         "emo.com/checkout-complete.html",
                         "Epic sadface: You can only access '/checkout-complete.html' when you are logged in.")]
 
+
+@allure.feature('Security')
+@allure.story('Unauthorized access to protected pages')
 @pytest.mark.parametrize(("web_pg_url", "error_code"), url_error_code_list)
-def test_no_access_to_app_pages_without_login(login_fixture,web_pg_url,error_code):
-    login_fixture.verify_app_pages_not_accessible_without_login(web_pg_url,error_code)
+def test_no_access_to_app_pages_without_login(login_fixture, web_pg_url, error_code):
+    login_fixture.verify_app_pages_not_accessible_without_login(web_pg_url, error_code)
     login_fixture.verify_back_navigation_blocked()
