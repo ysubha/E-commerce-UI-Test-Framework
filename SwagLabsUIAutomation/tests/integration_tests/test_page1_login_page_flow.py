@@ -13,7 +13,7 @@ from playwright.sync_api import expect
 
 def load_valid_credentials():
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    data_file = os.path.join(base_dir, "../data", "login_credentials.json")
+    data_file = os.path.join(base_dir, "../../data", "login_credentials.json")
     with open(data_file) as f:
         return json.load(f)['valid_user_credentials']
 

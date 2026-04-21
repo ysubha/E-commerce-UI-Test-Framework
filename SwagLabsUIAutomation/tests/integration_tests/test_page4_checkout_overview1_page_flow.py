@@ -25,7 +25,7 @@ def test_positive_case_of_checkout_with_cart_items(checkout_overview1_fixture):
 # TODO: move to utils/data_loader.py
 def load_user_details_and_errors_list_from_json():
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    data_file = os.path.join(base_dir, "../data", "checkout_user_details.json")
+    data_file = os.path.join(base_dir, "../../data", "checkout_user_details.json")
     with open(data_file) as data_file_obj:
         return json.load(data_file_obj)['user_details_and_errors']
 

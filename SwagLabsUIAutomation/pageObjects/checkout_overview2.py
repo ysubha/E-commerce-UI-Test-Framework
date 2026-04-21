@@ -1,5 +1,6 @@
 from playwright.sync_api import expect
 from SwagLabsUIAutomation.pageObjects.order_success_page import OrderSuccessPage
+from SwagLabsUIAutomation.utils.price_calculator import PriceCalculator
 
 
 class CheckoutOverview2:
@@ -8,7 +9,6 @@ class CheckoutOverview2:
         self.page = page
 
     def verify_if_all_items_are_present_in_checkout_overview(self, detailed_product_list):
-        net_price = 0.00
         for product in detailed_product_list:
             cart_item = self.page.locator(".cart_item").filter(has_text=product["name"])
             item_name = cart_item.locator(".inventory_item_name")
@@ -20,12 +20,14 @@ class CheckoutOverview2:
             price = f"${product['price']:.2f}"
             expect(item_price).to_contain_text(price)
 
-            net_price += product["price"]
+        price_cal_obj = PriceCalculator()
+        net_price = price_cal_obj.calculate_net_price(detailed_product_list)
+        tax = price_cal_obj.calculate_tax(net_price)
+        total = price_cal_obj.calculate_total(net_price)
 
         expect(self.page.locator(".summary_subtotal_label")).to_have_text(f"Item total: ${net_price:.2f}")
-        tax = round(net_price * 0.08, 2)
         expect(self.page.locator(".summary_tax_label")).to_have_text(f"Tax: ${tax:.2f}")
-        expect(self.page.locator(".summary_total_label")).to_have_text(f"Total: ${(net_price + tax):.2f}")
+        expect(self.page.locator(".summary_total_label")).to_have_text(f"Total: ${total:.2f}")
 
     def complete_checkout(self):
         self.page.locator("#finish").click()
