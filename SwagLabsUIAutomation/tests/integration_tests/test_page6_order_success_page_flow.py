@@ -28,7 +28,7 @@ def test_logout_post_order_completion(order_success_page_fixture):
 def test_reset_app_state(dashboard_fixture, product_details_list_from_json):
     names_list = product_details_list_from_json[1]
     dashboard_fixture.add_item_to_cart(names_list)
-    dashboard_fixture.page.locator("#react-burger-menu-btn").click()
-    dashboard_fixture.page.locator("a#reset_sidebar_link").click()
-    dashboard_fixture.page.locator("button#react-burger-cross-btn").click()
+    dashboard_fixture.page.locator('#react-burger-menu-btn').click()
+    dashboard_fixture.page.locator('a#reset_sidebar_link').click()
+    dashboard_fixture.page.locator('button#react-burger-cross-btn').click()
     dashboard_fixture.verify_cart_badge_count(0)

@@ -6,7 +6,7 @@ from SwagLabsUIAutomation.pageObjects.login import LoginPage
 
 # 1. Navigate to saucedemo.com
 # 2. Login with standard_user
-# 3. Add "Sauce Labs Bike Light" and "Sauce Labs Backpack" to cart
+# 3. Add 'Sauce Labs Bike Light' and 'Sauce Labs Backpack' to cart
 # 4. Go to cart, verify item is there
 # 5. Proceed to checkout
 # 6. Fill user details using Faker
@@ -19,7 +19,7 @@ def test_e2e_eflow(browser_selection, fake_checkout_user):
     browser_selection.context.clear_cookies()
 
 
-    item_name_list = ["Sauce Labs Bike Light", "Sauce Labs Backpack"]
+    item_name_list = ['Sauce Labs Bike Light', 'Sauce Labs Backpack']
 
     login_obj = LoginPage(browser_selection)
     login_obj.navigation()
