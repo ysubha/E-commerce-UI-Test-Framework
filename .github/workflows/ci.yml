@@ -26,5 +26,4 @@ jobs:
         run: playwright install --with-deps
 
       - name: Run tests
-        working-directory: SwagLabsUIAutomation
-        run: pytest /tests/ -v
+        run: pytest SwagLabsUIAutomation/tests/ -v

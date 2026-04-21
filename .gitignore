@@ -1,1 +1,7 @@
 /reports/
+.idea/
+reports/
+__pycache__/
+.pytest_cache/
+allure-results/
+*.pyc
