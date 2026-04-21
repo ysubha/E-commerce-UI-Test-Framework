@@ -17,7 +17,7 @@ class CheckoutOverview2:
 
             expect(item_name).to_contain_text(product['name'])
             expect(item_desc).to_contain_text(product['description'])
-            price = f'${product['price']:.2f}'
+            price = price = f"${product['price']:.2f}"
             expect(item_price).to_contain_text(price)
 
         price_cal_obj = PriceCalculator()
