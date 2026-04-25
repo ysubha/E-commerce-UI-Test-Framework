@@ -20,11 +20,12 @@ def pytest_runtest_makereport(item, call):
 
 
 @pytest.fixture(autouse=True)
-def allure_screenshot_on_failure(browser_selection, request):
+def allure_screenshot_on_failure(request):
     yield
-    if getattr(request.node, "rep_call", None) and request.node.rep_call.failed:
+    page = request.node.funcargs.get("browser_selection", None)
+    if page and getattr(request.node, "rep_call", None) and request.node.rep_call.failed:
         allure.attach(
-            browser_selection.screenshot(),
+            page.screenshot(),
             name=request.node.name,
             attachment_type=allure.attachment_type.PNG
         )
